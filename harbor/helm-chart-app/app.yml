@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://helm.goharbor.io    
+    chart: harbor/harbor
+    targetRevision: 1.16.0
+    helm:
+      valueFiles:                        # Optional: Override values.yml
+        - app-values.yml
+      parameters:                        # Optional: Set additional parameters
+        - name: replicaCount
+          value: "2"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: harbor
+    createNamespace: true
+  syncPolicy:                            # Optional: Set sync policies
+    automated:
+      prune: true
+      selfHeal: true
