@@ -1,25 +1,47 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: harbor-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://helm.goharbor.io    
-    chart: harbor/harbor
-    targetRevision: 1.16.0
-    helm:
-      valueFiles:                        # Optional: Override values.yml
-        - app-values.yml
-      parameters:                        # Optional: Set additional parameters
-        - name: replicaCount
-          value: "2"
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: harbor
-    createNamespace: true
-  syncPolicy:                            # Optional: Set sync policies
-    automated:
-      prune: true
-      selfHeal: true
+project: default
+source:
+  repoURL: 'https://helm.goharbor.io'
+  targetRevision: 1.16.0
+  helm:
+    values: |
+      expose:
+        tls:
+          certSource: secret
+          secret:
+            secretName: niyov-wildcard-certificate-tls
+        ingress:
+          hosts:
+            core: harbor.niyov.com
+          annotations: 
+            kubernetes.io/ingress.class: "nginx"
+            ingress.kubernetes.io/ssl-redirect: "false"
+            ingress.kubernetes.io/proxy-body-size: "0"
+            nginx.ingress.kubernetes.io/ssl-redirect: "false"
+            nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
+      externalURL: https://harbor.niyov.com
+
+      persistence:
+        persistentVolumeClaim:
+          registry:
+            existingClaim: harbor-pvc
+            subPath: registry
+          jobservice:
+            jobLog:
+              existingClaim: harbor-pvc
+              subPath: jobservice
+          database:
+            existingClaim: harbor-pvc
+            subPath: database
+          redis:
+            existingClaim: harbor-pvc
+            subPath: redis
+          trivy:
+            existingClaim: harbor-pvc
+            subPath: trivy
+  chart: harbor
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: harbor
+syncPolicy:
+  automated: {}
