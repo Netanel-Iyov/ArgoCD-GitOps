@@ -1,0 +1,35 @@
+expose:
+  tls:
+    certSource: secret
+    secret:
+      secretName: niyov-wildcard-certificate-tls
+  ingress:
+    hosts:
+      core: harbor.niyov.com
+    annotations: 
+      kubernetes.io/ingress.class: "nginx"
+      ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
+externalURL: https://harbor.niyov.com
+
+persistence:
+  persistentVolumeClaim:
+    registry:
+      existingClaim: harbor-pvc
+      subPath: registry
+    jobservice:
+      jobLog:
+        existingClaim: harbor-pvc
+        subPath: jobservice
+    database:
+      existingClaim: harbor-pvc
+      subPath: database
+    redis:
+      existingClaim: harbor-pvc
+      subPath: redis
+    trivy:
+      existingClaim: harbor-pvc
+      subPath: trivy
