@@ -14,7 +14,7 @@ spec:
           - $values/infrastructure-apps/harbor/values.yml
     # Values sourced from git
     - repoURL: 'https://github.com/Netanel-Iyov/ArgoCD-GitOps'
-      targetRevision: HEAD
+      targetRevision: main
       ref: values 
   destination:
     server: "https://kubernetes.default.svc"
