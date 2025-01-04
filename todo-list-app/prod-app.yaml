@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-list-prod
+  finalizers: []
+spec:
+  destination:
+    name: ''
+    namespace: todo-list-prod
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: .
+    repoURL: 'https://github.com/Netanel-Iyov/Todo-List-Chart.git'
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-prod.yaml
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
