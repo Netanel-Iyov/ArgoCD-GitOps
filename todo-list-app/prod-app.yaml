@@ -15,7 +15,7 @@ spec:
       valueFiles:
         - values-prod.yaml
   sources: []
-  project: default
+  project: todo-list
   syncPolicy:
     automated:
       prune: true
