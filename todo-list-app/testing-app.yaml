@@ -10,7 +10,7 @@ spec:
   source:
     path: .
     repoURL: 'https://github.com/Netanel-Iyov/Todo-List-Chart.git'
-    targetRevision: niyov/add-testing-env
+    targetRevision: main
     helm:
       valueFiles:
         - values-testing.yaml
