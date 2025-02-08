@@ -12,8 +12,36 @@ spec:
     repoURL: 'https://github.com/Netanel-Iyov/Todo-List-Chart.git'
     targetRevision: main
     helm:
-      valueFiles:
-        - values-staging.yaml
+      values: |
+        global:
+          namespace: todo-list-staging
+        
+        api:
+          ingress:
+            host: api-todo-list-staging.niyov.com
+        
+          deployment:
+            replicas: 1
+            apiContainer:
+              image: harbor.niyov.com/applications/todo-list-api-staging:2.0.1
+        
+        client:
+          ingress:
+            host: todo-list-staging.niyov.com
+        
+          deployment:
+            replicas: 1
+            clientContainer:
+              image: harbor.niyov.com/applications/todo-list-client-staging:2.0.1
+        
+        db:
+          deployment:
+            volumes:
+              pv:
+                name: todo-list-db-pv-staging
+                hostPath: /nfs/volumes/todo-list-mongo-db-staging
+              pvc:
+                name: todo-list-db-pvc-staging
   sources: []
   project: todo-list
   syncPolicy:
