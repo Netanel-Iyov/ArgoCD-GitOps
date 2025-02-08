@@ -23,7 +23,7 @@ spec:
           deployment:
             replicas: 1
             apiContainer:
-              image: harbor.niyov.com/applications/todo-list-api:2.0.2
+              image: harbor.niyov.com/applications/todo-list-api:2.0.1
         
         client:
           ingress:
@@ -32,7 +32,7 @@ spec:
           deployment:
             replicas: 1
             clientContainer:
-              image: harbor.niyov.com/applications/todo-list-client:2.0.2
+              image: harbor.niyov.com/applications/todo-list-client:2.0.1
         
         db:
           deployment:
