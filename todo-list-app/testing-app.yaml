@@ -21,7 +21,7 @@ spec:
             host: api-todo-list-testing.niyov.com
         
           deployment:
-            replicas: 1
+            replicas: 2
             apiContainer:
               image: harbor.niyov.com/applications/todo-list-api-testing:f3aaffb9ea7a31eead5e1a4640fc73b7afbd377f
         
@@ -30,7 +30,7 @@ spec:
             host: todo-list-testing.niyov.com
           
           deployment:
-            replicas: 1
+            replicas: 2
             clientContainer:
               image: harbor.niyov.com/applications/todo-list-client-testing:f3aaffb9ea7a31eead5e1a4640fc73b7afbd377f
         
