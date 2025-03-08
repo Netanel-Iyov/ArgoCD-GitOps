@@ -30,7 +30,7 @@ spec:
             host: todo-list-testing.niyov.com
           
           deployment:
-            replicas: 2
+            replicas: 4
             clientContainer:
               image: harbor.niyov.com/applications/todo-list-client-testing:f3aaffb9ea7a31eead5e1a4640fc73b7afbd377f
         
