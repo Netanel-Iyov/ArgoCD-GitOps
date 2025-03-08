@@ -10,7 +10,7 @@ spec:
   source:
     path: .
     repoURL: 'https://github.com/Netanel-Iyov/Todo-List-Chart.git'
-    targetRevision: main
+    targetRevision: v1.0.0
     helm:
       values: |
         global:
