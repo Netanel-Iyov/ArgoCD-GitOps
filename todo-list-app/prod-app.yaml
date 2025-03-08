@@ -21,19 +21,39 @@ spec:
             host: api-todo-list.niyov.com
         
           deployment:
-            replicas: 1
             apiContainer:
               image: harbor.niyov.com/applications/todo-list-api:2.0.2
-        
+              requests:
+                cpu: "200m"
+              limits:
+                cpu: "300m"
+          
+          hpa:
+            minReplicas: 2
+            maxReplicas: 5
+            metrics:
+              cpu:
+                averageUtilization: 50
+                
         client:
           ingress:
             host: todo-list.niyov.com
         
           deployment:
-            replicas: 1
             clientContainer:
               image: harbor.niyov.com/applications/todo-list-client:2.0.2
-        
+              requests:
+                cpu: "100m"
+              limits:
+                cpu: "150m"
+
+          hpa:
+            minReplicas: 2
+            maxReplicas: 5
+            metrics:
+              cpu:
+                averageUtilization: 50
+                
         db:
           deployment:
             volumes:
