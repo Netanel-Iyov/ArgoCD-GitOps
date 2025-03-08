@@ -47,6 +47,13 @@ spec:
               limits:
                 cpu: "150m"
 
+          hpa:
+            minReplicas: 1
+            maxReplicas: 3
+            metrics:
+              cpu:
+                averageUtilization: 50
+
         db:
           deployment:
             volumes:
