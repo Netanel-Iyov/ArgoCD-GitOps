@@ -27,6 +27,13 @@ spec:
                 cpu: "200m"
               limits:
                 cpu: "300m"
+          
+          hpa:
+            minReplicas: 1
+            maxReplicas: 3
+            metrics:
+              cpu:
+                averageUtilization: 50
         
         client:
           ingress:
