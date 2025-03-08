@@ -10,7 +10,7 @@ spec:
   source:
     path: .
     repoURL: 'https://github.com/Netanel-Iyov/Todo-List-Chart.git'
-    targetRevision: v1.0.0
+    targetRevision: niyov/add-hpa
     helm:
       values: |
         global:
@@ -21,19 +21,25 @@ spec:
             host: api-todo-list-testing.niyov.com
         
           deployment:
-            replicas: 2
             apiContainer:
               image: harbor.niyov.com/applications/todo-list-api-testing:f3aaffb9ea7a31eead5e1a4640fc73b7afbd377f
+              requests:
+                cpu: "200m"
+              limits:
+                cpu: "300m"
         
         client:
           ingress:
             host: todo-list-testing.niyov.com
           
           deployment:
-            replicas: 4
             clientContainer:
               image: harbor.niyov.com/applications/todo-list-client-testing:f3aaffb9ea7a31eead5e1a4640fc73b7afbd377f
-        
+              requests:
+                cpu: "100m"
+              limits:
+                cpu: "150m"
+
         db:
           deployment:
             volumes:
