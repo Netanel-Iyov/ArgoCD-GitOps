@@ -21,7 +21,6 @@ spec:
             host: api-todo-list-staging.niyov.com
         
           deployment:
-            replicas: 1
             apiContainer:
               image: harbor.niyov.com/applications/todo-list-api-staging:2.0.2
               requests:
@@ -41,7 +40,6 @@ spec:
             host: todo-list-staging.niyov.com
         
           deployment:
-            replicas: 1
             clientContainer:
               image: harbor.niyov.com/applications/todo-list-client-staging:2.0.2
               requests:
