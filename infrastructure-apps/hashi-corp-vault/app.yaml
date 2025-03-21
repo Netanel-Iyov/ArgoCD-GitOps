@@ -35,7 +35,7 @@ spec:
             enabled: true
             size: 10Gi
             mountPath: "/vault/data"
-            accessMode: ReadWriteMany
+            accessMode: ReadWriteOnce
             storageClass: standard
   destination:
     server: "https://kubernetes.default.svc"

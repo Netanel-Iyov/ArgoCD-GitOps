@@ -8,7 +8,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     # Many nodes can mount it as read-write
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
