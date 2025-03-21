@@ -31,7 +31,11 @@ spec:
                 secretName: niyov-wildcard-certificate-tls
             hosts:
               - host: vault.niyov.com
-
+          dataStorage:
+            enabled: true
+            size: 10Gi
+            mountPath: "/vault/data"
+            accessMode: ReadWriteMany
   destination:
     server: "https://kubernetes.default.svc"
     namespace: hashi-corp-vault
