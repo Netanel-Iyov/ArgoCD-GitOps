@@ -36,6 +36,7 @@ spec:
             size: 10Gi
             mountPath: "/vault/data"
             accessMode: ReadWriteMany
+            storageClass: standard
   destination:
     server: "https://kubernetes.default.svc"
     namespace: hashi-corp-vault
