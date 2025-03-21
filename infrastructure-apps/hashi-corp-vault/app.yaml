@@ -13,7 +13,7 @@ spec:
       values: |
         global:
           namespace: hashi-corp-vault
-          tlsDisable: false
+          tlsDisable: true
         injector:
           replicas: 1
           metrics:
