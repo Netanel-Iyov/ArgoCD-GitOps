@@ -28,7 +28,6 @@ spec:
               - hosts:
                 - '*.niyov.com'
                 - niyov.com
-                secretName: niyov-wildcard-certificate-tls
             hosts:
               host: vault.niyov.com
 
