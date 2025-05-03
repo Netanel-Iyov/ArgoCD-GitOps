@@ -11,14 +11,14 @@ spec:
     targetRevision: 66.3.1
     helm:
       values: |
-      prometheus:
-        prometheusSpec:
-          additionalScrapeConfigs:
-          - job_name: jenkins
-            metrics_path: /prometheus/
-            static_configs:
-            - targets:
-              - jenkins.niyov.com
+        prometheus:
+          prometheusSpec:
+            additionalScrapeConfigs:
+            - job_name: jenkins
+              metrics_path: /prometheus/
+              static_configs:
+              - targets:
+                - jenkins.niyov.com
   destination:
     server: https://kubernetes.default.svc
     namespace: prometheus-stack
