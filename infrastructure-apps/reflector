@@ -1,1 +1,21 @@
-
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reflecetor
+  namespace: argocd
+spec:
+  destination:
+    namespace: reflector
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://emberstack.github.io/helm-charts
+    targetRevision: 9.1.38
+    chart: reflector
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
