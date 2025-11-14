@@ -11,6 +11,10 @@ spec:
       values: |
         preUpgradeChecker:
           jobEnabled: false 
+        service:
+          ui:
+            type: NodePort
+            nodePort: 30000
     repoURL: https://charts.longhorn.io
     targetRevision: 1.10.1
   destination:
