@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: harbor-testing
+  name: harbor
   namespace: argocd
 spec:
   project: default
@@ -14,7 +14,7 @@ spec:
           tls:
             certSource: secret
             secret:
-              secretName: harbor-wildcard-tls
+              secretName: niyov-wildcard-tls
           ingress:
             hosts:
               core: harbor.niyov.com
