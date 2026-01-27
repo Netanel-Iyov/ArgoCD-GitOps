@@ -36,10 +36,10 @@ spec:
               value: "false" # Prevents it from trying to chown back to 1000
 
           # Ensure the main controller also knows about the cache location
-          env:
+          initContainerEnv:
             - name: "CACHE_DIR"
               value: "/var/jenkins_home/.cache"
-              
+
           # Ingress Configuration
           ingress:
             enabled: true
