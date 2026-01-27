@@ -19,6 +19,22 @@ spec:
         controller:
           componentName: "jenkins-controller"
           serviceType: ClusterIP
+          # Pod-level: Ensures the volume is mounted for GID 2000
+          podSecurityContext:
+            runAsUser: 2000
+            runAsGroup: 2000
+            fsGroup: 2000
+          
+          # Container-level: Forces the Jenkins process to start as 2000
+          containerSecurityContext:
+            runAsUser: 2000
+            runAsGroup: 2000
+          
+          # This tells the init container (which fixes permissions) to use 2000
+          initContainerEnv:
+            - name: "DEFAULT_CHOWN"
+              value: "false" # Prevents it from trying to chown back to 1000
+              
           # Ingress Configuration
           ingress:
             enabled: true
