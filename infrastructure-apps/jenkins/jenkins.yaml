@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jenkins
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.jenkins.io'
+    chart: jenkins
+    targetRevision: 5.8.133
+    helm:
+      releaseName: jenkins
+      values: |
+        controller:
+          componentName: "jenkins-controller"
+          serviceType: ClusterIP
+          # Ingress Configuration
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            apiVersion: "networking.k8s.io/v1"
+            hostName: jenkins.niyov.com
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt-prod"
+              kubernetes.io/ingress.class: nginx
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+            tls:
+              - secretName: niyov-wildcard-tls
+                hosts:
+                  - jenkins.niyov.com
+          # Ensure Jenkins knows its external URL for redirects
+          jenkinsUrl: "https://jenkins.niyov.com"
+          installPlugins:
+            - kubernetes:4260.v1642898c6d66
+            - workflow-aggregator:600.vb_57cdd26fdd7
+            - git:5.2.1
+            - configuration-as-code:1850.v2a_5b_5436660
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: jenkins
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
