@@ -57,10 +57,11 @@ spec:
           # Ensure Jenkins knows its external URL for redirects
           jenkinsUrl: "https://jenkins.niyov.com"
           installPlugins:
-            - kubernetes:4260.v1642898c6d66
-            - workflow-aggregator:600.vb_57cdd26fdd7
-            - git:5.2.1
-            - configuration-as-code:1850.v2a_5b_5436660
+            - kubernetes:4310.v1b_1c2c3d4e5f
+            - configuration-as-code:1915.v652c7764d782
+            - git:5.5.0
+            - workflow-aggregator:608.v67378e9d3db_1
+            - credentials-binding:688.v5b_15a_33a_6a_0c
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
