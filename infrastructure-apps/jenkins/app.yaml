@@ -12,6 +12,10 @@ spec:
     helm:
       releaseName: jenkins
       values: |
+        persistence:
+          enabled: true
+          existingClaim: jenkins-pvc
+
         controller:
           componentName: "jenkins-controller"
           serviceType: ClusterIP
