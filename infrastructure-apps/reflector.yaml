@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: https://emberstack.github.io/helm-charts
-    targetRevision: 9.1.38
+    targetRevision: 10.0.3
     chart: reflector
   project: default
   syncPolicy:
