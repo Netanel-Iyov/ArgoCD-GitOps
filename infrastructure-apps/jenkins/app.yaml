@@ -56,13 +56,13 @@ spec:
           # Ensure Jenkins knows its external URL for redirects
           jenkinsUrl: "https://jenkins.niyov.com"
           installPlugins:
-            - kubernetes:7.3.1-256.v788a_0b_787114
-            - configuration-as-code:2037.v8e5349845172
-            - git:5.9.0
-            - workflow-aggregator:latest608.v67378e9d3db_1
-            - credentials-binding:702.vfe613e537e88
-            - locale:614.va_6a_5a_1a_f2b_38
-            - job-dsl:1.93
+            - kubernetes
+            - configuration-as-code
+            - git
+            - workflow-aggregator
+            - credentials-binding
+            - locale
+            - job-dsl
           JCasC:
             defaultConfig: true
             configScripts:
