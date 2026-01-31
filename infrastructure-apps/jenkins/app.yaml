@@ -83,8 +83,8 @@ spec:
                         namespace: "jenkins"
                         jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
                         templates:
-                          - name: "default-agent"
-                            label: "default-agent"
+                          - name: "default-k8s-agent"
+                            label: "default-k8s-agent"
                             nodeUsageMode: NORMAL
                             containers:
                               - name: "jnlp"
@@ -99,7 +99,7 @@ spec:
                       job('seed-job-dsl') {
                         description('Seeds Jenkins jobs from Job DSL repository')
 
-                        label('default-agent')
+                        label('default-k8s-agent')
 
                         scm {
                           git {
@@ -119,6 +119,8 @@ spec:
                           }
                         }
                       }
+        agent: 
+          jenkinsTunnel: "jenkins.jenkins.svc.cluster.local:50000"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
