@@ -99,6 +99,8 @@ spec:
                       job('seed-job-dsl') {
                         description('Seeds Jenkins jobs from Job DSL repository')
 
+                        label('default-agent')
+
                         scm {
                           git {
                             remote {
@@ -113,6 +115,7 @@ spec:
                             external('*/DSL**.groovy')
                             removeAction('DELETE')
                             removeViewAction('DELETE')
+                            lookupStrategy('JENKINS_ROOT')
                           }
                         }
                       }
