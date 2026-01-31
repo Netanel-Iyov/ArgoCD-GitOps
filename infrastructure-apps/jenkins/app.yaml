@@ -61,6 +61,38 @@ spec:
             - git:latest
             - workflow-aggregator:latest
             - credentials-binding:latest
+            - locale:latest
+          JCasC:
+            defaultConfig: true
+            configScripts:
+              ui-settings: |
+                clouds:
+                  - kubernetes:
+                      name: "kubernetes"
+                      serverUrl: "https://kubernetes.default.svc.cluster.local"
+                      namespace: "jenkins"
+                      jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
+                      templates:
+                        - name: "default-agent"
+                          label: "default-agent"
+                          nodeUsageMode: NORMAL
+                          containers:
+                            - name: "jnlp"
+                              image: "jenkins/inbound-agent:latest"
+                            - name: "default-k8s-tools-container"
+                              image: "alpine/k8s:1.29.1"
+                              command: "cat"
+                              ttyEnabled: true
+                jenkins:
+                  systemMessage: "Welcome to my home-lab CI/CD platform. This Application is Managed by ArgoCD"
+                  numExecutors: 0 
+                  mode: NORMAL
+                unclassified:
+                  location:
+                    adminAddress: "admin@niyov.com"
+                  locale:
+                    systemLocale: "en_US"
+                    ignoreAcceptLanguage: true
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
