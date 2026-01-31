@@ -93,6 +93,29 @@ spec:
                                 image: "alpine/k8s:1.29.1"
                                 command: "cat"
                                 ttyEnabled: true
+              seed-job: |
+                jobs:
+                  - script: >
+                      job('seed-job-dsl') {
+                        description('Seeds Jenkins jobs from Job DSL repository')
+
+                        scm {
+                          git {
+                            remote {
+                              url('https://github.com/Netanel-Iyov/Jenkins-Dsl.git')
+                            }
+                            branch('*/main')
+                          }
+                        }
+
+                        steps {
+                          dsl {
+                            external('*/DSL**.groovy')
+                            removeAction('DELETE')
+                            removeViewAction('DELETE')
+                          }
+                        }
+                      }
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
