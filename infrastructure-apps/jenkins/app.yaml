@@ -5,6 +5,14 @@ metadata:
   namespace: argocd
 spec:
   project: default
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: niyov-wildcard-tls
+      namespace: jenkins
+      jsonPointers:
+        - /data
+        - /metadata/annotations
   source:
     repoURL: 'https://charts.jenkins.io'
     chart: jenkins
