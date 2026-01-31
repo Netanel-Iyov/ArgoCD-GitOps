@@ -73,7 +73,7 @@ spec:
                     systemLocale: en
                     ignoreAcceptLanguage: true
                     allowUserPreferences: false
-              k8s-integration:
+              k8s-integration: |
                 jenkins:
                   clouds:
                     - kubernetes:
