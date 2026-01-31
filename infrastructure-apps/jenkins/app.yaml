@@ -85,8 +85,6 @@ spec:
                               ttyEnabled: true
                 jenkins:
                   systemMessage: "Welcome to my home-lab CI/CD platform. This Application is Managed by ArgoCD"
-                  numExecutors: 0 
-                  mode: NORMAL
                 unclassified:
                   location:
                     adminAddress: "admin@niyov.com"
