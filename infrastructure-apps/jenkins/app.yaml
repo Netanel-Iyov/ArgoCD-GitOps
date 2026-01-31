@@ -82,6 +82,7 @@ spec:
                         serverUrl: "https://kubernetes.default.svc.cluster.local"
                         namespace: "jenkins"
                         jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
+                        jenkinsTunnel: "http://jenkins.jenkins.svc.cluster.local:50000"
                         templates:
                           - name: "default-k8s-agent"
                             label: "default-k8s-agent"
@@ -119,8 +120,6 @@ spec:
                           }
                         }
                       }
-        agent: 
-          jenkinsTunnel: "jenkins.jenkins.svc.cluster.local:50000"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
