@@ -84,13 +84,8 @@ spec:
                               command: "cat"
                               ttyEnabled: true
                 jenkins:
-                  systemMessage: "Welcome to my home-lab CI/CD platform. This Application is Managed by ArgoCD"
-                unclassified:
-                  location:
-                    adminAddress: "admin@niyov.com"
-                  locale:
-                    systemLocale: "en_US"
-                    ignoreAcceptLanguage: true
+                  systemMessage: "Welcome to my home-lab CI/CD platform. This Application is Managed by ArgoCD/"
+
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
