@@ -120,14 +120,10 @@ spec:
                             removeAction('DELETE')
                             removeViewAction('DELETE')
                             lookupStrategy('JENKINS_ROOT')
+                            sandbox(false)
                           }
                         }
                       }
-
-              script-security: |
-                security:
-                  scriptApproval:
-                    disable: true
 
   destination:
     server: 'https://kubernetes.default.svc'
