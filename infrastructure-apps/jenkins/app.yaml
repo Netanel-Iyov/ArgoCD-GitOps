@@ -124,6 +124,11 @@ spec:
                         }
                       }
 
+              script-security: |
+                security:
+                  scriptApproval:
+                    disable: true
+
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
