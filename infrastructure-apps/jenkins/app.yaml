@@ -16,6 +16,9 @@ spec:
           enabled: true
           existingClaim: jenkins-pvc
 
+        agent: 
+          websocket: true
+
         controller:
           componentName: "jenkins-controller"
           serviceType: ClusterIP
@@ -82,6 +85,7 @@ spec:
                         serverUrl: "https://kubernetes.default.svc.cluster.local"
                         namespace: "jenkins"
                         jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
+                        webSocket: true
                         templates:
                           - name: "default-k8s-agent"
                             label: "default-k8s-agent"
@@ -119,8 +123,7 @@ spec:
                           }
                         }
                       }
-        agent: 
-          websocket: true
+
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
