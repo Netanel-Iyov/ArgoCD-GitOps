@@ -105,35 +105,44 @@ spec:
               seed-job: |
                 jobs:
                   - script: >
-                      job('seed-job-dsl') {
+                      pipelineJob('seed-job-dsl') {
                         description('Seeds Jenkins jobs from Job DSL repository')
 
-                        label('default-k8s-agent')
-
                         parameters {
-                          stringParam('BRANCH_NAME', 'main', 'Git branch to seed jobs from')
+                          stringParam('BRANCH', 'main', 'Git branch to seed jobs from')
                         }
 
-                        environmentVariables {
-                          env('JENKINS_TESTING_ENV', 'false')
-                          env('JOBS_BASE_PATH', '/')
-                        }
-                        
-                        scm {
-                          git {
-                            remote {
-                              url('https://github.com/Netanel-Iyov/Jenkins-Dsl.git')
-                            }
-                            branch("*/${params.BRANCH_NAME}")
-                          }
-                        }
+                        definition {
+                          cps {
+                            script("""
+                              pipeline {
+                                label 'default-k8s-agent'
 
-                        steps {
-                          dsl {
-                            external('*/DSL**.groovy')
-                            removeAction('DELETE')
-                            removeViewAction('DELETE')
-                            lookupStrategy('JENKINS_ROOT')
+                                environment {
+                                  JENKINS_TESTING_ENV = 'false'
+                                  JOBS_BASE_PATH = '/'
+                                }
+
+                                stages {
+                                  stage('Checkout DSL repo') {
+                                    steps {
+                                      git branch: "*/${BRANCH}", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
+                                    }
+                                  }
+
+                                  stage('Seed jobs') {
+                                    steps {
+                                      jobDsl(
+                                        targets: '**/DSL**.groovy',
+                                        removeAction: 'DELETE',
+                                        removeViewAction: 'DELETE',
+                                        lookupStrategy: 'JENKINS_ROOT'
+                                      )
+                                    }
+                                  }
+                                }
+                              }
+                            """)
                           }
                         }
                       }
