@@ -78,6 +78,7 @@ spec:
                     systemLocale: en
                     ignoreAcceptLanguage: true
                     allowUserPreferences: false
+
               k8s-integration: |
                 jenkins:
                   clouds:
@@ -98,10 +99,12 @@ spec:
                                 image: "alpine/k8s:1.29.1"
                                 command: "cat"
                                 ttyEnabled: true
+
               security: |
                 security:
                   globalJobDslSecurityConfiguration:
                     useScriptSecurity: false
+
               seed-job: |
                 jobs:
                   - script: >
@@ -136,7 +139,8 @@ spec:
                                         targets: '**/DSL**.groovy',
                                         removeAction: 'DELETE',
                                         removeViewAction: 'DELETE',
-                                        lookupStrategy: 'JENKINS_ROOT'
+                                        lookupStrategy: 'JENKINS_ROOT',
+                                        sandbox: true
                                       )
                                     }
                                   }
