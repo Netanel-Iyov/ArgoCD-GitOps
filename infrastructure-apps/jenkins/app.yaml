@@ -124,7 +124,7 @@ spec:
                             remote {
                               url('https://github.com/Netanel-Iyov/Jenkins-Dsl.git')
                             }
-                            branch("*/${BRANCH_NAME}")
+                            branch("*/${params.BRANCH_NAME}")
                           }
                         }
 
