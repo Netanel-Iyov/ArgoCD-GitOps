@@ -151,7 +151,7 @@ spec:
                         }
                       }
                   - script: queue('seed-job-dsl') 
-
+                  - script: queue('seed-job-dsl') 
 
   destination:
     server: 'https://kubernetes.default.svc'
