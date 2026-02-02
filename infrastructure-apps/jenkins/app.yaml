@@ -117,7 +117,7 @@ spec:
 
                         definition {
                           cps {
-                            script("""
+                            script('''
                               pipeline {
                                 agent { 
                                   label 'default-k8s-agent'
@@ -131,7 +131,7 @@ spec:
                                 stages {
                                   stage('Checkout DSL repo') {
                                     steps {
-                                      git branch: "*/\${params.BRANCH}", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
+                                      git branch: "*/${params.BRANCH}", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
                                     }
                                   }
 
@@ -147,7 +147,7 @@ spec:
                                   }
                                 }
                               }
-                              """)
+                              ''')
                             }
                           }
                         }
