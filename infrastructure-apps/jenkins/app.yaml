@@ -66,6 +66,7 @@ spec:
             - credentials-binding
             - locale
             - job-dsl
+            - envinject
           JCasC:
             defaultConfig: true
             configScripts:
