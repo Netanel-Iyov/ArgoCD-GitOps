@@ -119,7 +119,9 @@ spec:
                           cps {
                             script("""
                               pipeline {
-                                label 'default-k8s-agent'
+                                agent { 
+                                  label 'default-k8s-agent'
+                                }
 
                                 environment {
                                   JENKINS_TESTING_ENV = 'false'
@@ -137,20 +139,18 @@ spec:
                                     steps {
                                       jobDsl(
                                         targets: '**/DSL**.groovy',
-                                        removeAction: 'DELETE',
-                                        removeViewAction: 'DELETE',
-                                        lookupStrategy: 'JENKINS_ROOT',
-                                        sandbox: true
+                                        removedJobAction: 'DELETE',
+                                        removedViewAction: 'DELETE',
+                                        lookupStrategy: 'JENKINS_ROOT'
                                       )
                                     }
                                   }
                                 }
                               }
-                            """)
+                              """)
+                            }
                           }
                         }
-                      }
-                  - script: queue('seed-job-dsl') 
                   - script: queue('seed-job-dsl') 
 
   destination:
