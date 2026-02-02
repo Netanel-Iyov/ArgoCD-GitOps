@@ -109,12 +109,21 @@ spec:
 
                         label('default-k8s-agent')
 
+                        parameters {
+                          stringParam('BRANCH_NAME', 'main', 'Git branch to seed jobs from')
+                        }
+
+                        environmentVariables {
+                          env('JENKINS_TESTING_ENV', 'false')
+                          env('JOBS_BASE_PATH', '/')
+                        }
+                        
                         scm {
                           git {
                             remote {
                               url('https://github.com/Netanel-Iyov/Jenkins-Dsl.git')
                             }
-                            branch('*/main')
+                            branch("*/${BRANCH_NAME}")
                           }
                         }
 
