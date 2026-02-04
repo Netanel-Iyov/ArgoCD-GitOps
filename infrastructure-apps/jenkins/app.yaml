@@ -118,6 +118,10 @@ spec:
                                   label 'default-k8s-agent'
                                 }
 
+                                environment {
+                                  PRODUCTION_ENV  = 'true'
+                                }
+
                                 stages {
                                   stage('Checkout DSL repo') {
                                     steps {
