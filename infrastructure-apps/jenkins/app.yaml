@@ -66,6 +66,7 @@ spec:
             - locale
             - job-dsl
             - envinject
+            - generic-webhook-trigger
           JCasC:
             defaultConfig: true
             configScripts:
