@@ -135,7 +135,8 @@ spec:
                                         targets: '**/DSL**.groovy',
                                         removedJobAction: 'DELETE',
                                         removedViewAction: 'DELETE',
-                                        lookupStrategy: 'SEED_JOB'
+                                        lookupStrategy: 'SEED_JOB',
+                                        additionalParameters: [PRODUCTION_ENV: env.PRODUCTION_ENV]
                                       )
                                     }
                                   }
