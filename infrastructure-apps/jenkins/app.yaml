@@ -108,49 +108,40 @@ spec:
               seed-job: |
                 jobs:
                   - script: >
-                      pipelineJob('seed-job-dsl') {
-                        description('Seeds Jenkins jobs from Job DSL repository')
+              pipelineJob('seed-job-dsl') {
+                description('Seeds Jenkins jobs from Job DSL repository')
 
-                        parameters {
-                          stringParam('BRANCH', 'main', 'Git branch to seed jobs from')
+                definition {
+                  cps {
+                    script('''
+                      pipeline {
+                        agent { 
+                          label 'default-k8s-agent'
                         }
 
-                        definition {
-                          cps {
-                            script('''
-                              pipeline {
-                                agent { 
-                                  label 'default-k8s-agent'
-                                }
+                        stages {
+                          stage('Checkout DSL repo') {
+                            steps {
+                              git branch: "main", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
+                            }
+                          }
 
-                                environment {
-                                  JENKINS_TESTING_ENV = 'false'
-                                  JOBS_BASE_PATH = '/'
-                                }
-
-                                stages {
-                                  stage('Checkout DSL repo') {
-                                    steps {
-                                      git branch: "main", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
-                                    }
-                                  }
-
-                                  stage('Seed jobs') {
-                                    steps {
-                                      jobDsl(
-                                        targets: '**/DSL**.groovy',
-                                        removedJobAction: 'DELETE',
-                                        removedViewAction: 'DELETE',
-                                        lookupStrategy: 'JENKINS_ROOT'
-                                      )
-                                    }
-                                  }
-                                }
-                              }
-                              ''')
+                          stage('Seed jobs') {
+                            steps {
+                              jobDsl(
+                                targets: '**/DSL**.groovy',
+                                removedJobAction: 'DELETE',
+                                removedViewAction: 'DELETE',
+                                lookupStrategy: 'SEED_JOB'
+                              )
                             }
                           }
                         }
+                      }
+                    ''')
+                  }
+                }
+              }
                   - script: queue('seed-job-dsl') 
 
   destination:
