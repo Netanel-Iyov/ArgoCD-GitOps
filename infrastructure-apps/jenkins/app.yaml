@@ -38,8 +38,7 @@ spec:
             - name: "DEFAULT_CHOWN"
               value: "false" # Prevents it from trying to chown back to 1000
 
-          # Ensure the main controller also knows about the cache location
-          initContainerEnv:
+            # Ensure the main controller also knows about the cache location
             - name: "CACHE_DIR"
               value: "/var/jenkins_home/.cache"
 
@@ -108,40 +107,40 @@ spec:
               seed-job: |
                 jobs:
                   - script: >
-              pipelineJob('seed-job-dsl') {
-                description('Seeds Jenkins jobs from Job DSL repository')
+                      pipelineJob('seed-job-dsl') {
+                        description('Seeds Jenkins jobs from Job DSL repository')
 
-                definition {
-                  cps {
-                    script('''
-                      pipeline {
-                        agent { 
-                          label 'default-k8s-agent'
-                        }
+                        definition {
+                          cps {
+                            script('''
+                              pipeline {
+                                agent { 
+                                  label 'default-k8s-agent'
+                                }
 
-                        stages {
-                          stage('Checkout DSL repo') {
-                            steps {
-                              git branch: "main", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
-                            }
-                          }
+                                stages {
+                                  stage('Checkout DSL repo') {
+                                    steps {
+                                      git branch: "main", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
+                                    }
+                                  }
 
-                          stage('Seed jobs') {
-                            steps {
-                              jobDsl(
-                                targets: '**/DSL**.groovy',
-                                removedJobAction: 'DELETE',
-                                removedViewAction: 'DELETE',
-                                lookupStrategy: 'SEED_JOB'
-                              )
-                            }
+                                  stage('Seed jobs') {
+                                    steps {
+                                      jobDsl(
+                                        targets: '**/DSL**.groovy',
+                                        removedJobAction: 'DELETE',
+                                        removedViewAction: 'DELETE',
+                                        lookupStrategy: 'SEED_JOB'
+                                      )
+                                    }
+                                  }
+                                }
+                              }
+                            ''')
                           }
                         }
                       }
-                    ''')
-                  }
-                }
-              }
                   - script: queue('seed-job-dsl') 
 
   destination:
