@@ -119,6 +119,10 @@ spec:
                                   label 'default-k8s-agent'
                                 }
 
+                                parameters {
+                                  string(name: 'BRANCH',  defaultValue: 'main', description: 'Branch to Seed DSL Jobs From')
+                                }
+
                                 environment {
                                   PRODUCTION_ENV  = 'true'
                                 }
@@ -126,7 +130,7 @@ spec:
                                 stages {
                                   stage('Checkout DSL repo') {
                                     steps {
-                                      git branch: "main", url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
+                                      git branch: params.BRANCH, url: 'https://github.com/Netanel-Iyov/Jenkins-Dsl.git'
                                     }
                                   }
 
