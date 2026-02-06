@@ -141,7 +141,7 @@ spec:
                                         removedJobAction: 'DELETE',
                                         removedViewAction: 'DELETE',
                                         lookupStrategy: 'SEED_JOB',
-                                        additionalParameters: [PRODUCTION_ENV: env.PRODUCTION_ENV]
+                                        additionalParameters: [PRODUCTION_ENV: env.PRODUCTION_ENV, BRANCH: params.BRANCH]
                                       )
                                     }
                                   }
