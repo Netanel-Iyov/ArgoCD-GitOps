@@ -10,6 +10,6 @@ spec:
     # Many nodes can mount it as read-write
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: standard
+  storageClassName: harbor-standard
   hostPath:
     path: /nfs/data/harbor
