@@ -13,4 +13,3 @@ spec:
   storageClassName: harbor-standard
   hostPath:
     path: /nfs/data/harbor
-    type: DirectoryOrCreate
