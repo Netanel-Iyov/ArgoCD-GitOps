@@ -28,7 +28,7 @@ spec:
         externalURL: https://harbor.niyov.com
         persistence:
           enabled: true
-          resourceDefaultStorageClass: "nfs-csi-deafult-storageclass"
+          resourceDefaultStorageClass: "nfs-csi-default-storageclass"
           persistentVolumeClaim:
             registry:
               size: 10Gi
