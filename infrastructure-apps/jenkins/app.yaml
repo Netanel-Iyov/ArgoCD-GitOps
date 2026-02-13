@@ -52,6 +52,7 @@ spec:
             - generic-webhook-trigger
             - pipeline-utility-steps
             - rebuild
+            - blueocean
           JCasC:
             defaultConfig: true
             configScripts:
