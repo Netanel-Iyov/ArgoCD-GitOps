@@ -50,6 +50,7 @@ spec:
             - job-dsl
             - envinject
             - generic-webhook-trigger
+            - pipeline-utility-steps
           JCasC:
             defaultConfig: true
             configScripts:
