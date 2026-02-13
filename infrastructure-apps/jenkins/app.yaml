@@ -51,6 +51,7 @@ spec:
             - envinject
             - generic-webhook-trigger
             - pipeline-utility-steps
+            - rebuild
           JCasC:
             defaultConfig: true
             configScripts:
