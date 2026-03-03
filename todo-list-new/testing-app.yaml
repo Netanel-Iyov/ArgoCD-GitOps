@@ -1,0 +1,72 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-list-testing
+spec:
+  destination:
+    name: ''
+    namespace: todo-list-testing
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: .
+    repoURL: 'https://github.com/Netanel-Iyov/Todo-List-Chart.git'
+    targetRevision: v1.0.1
+    helm:
+      values: |
+        global:
+          namespace: todo-list-testing
+        
+        api:
+          ingress:
+            host: api-todo-list-testing.niyov.com
+        
+          deployment:
+            apiContainer:
+              image: harbor.niyov.com/applications/todo-list-api-testing:2cc58b88c014dce7d5afa480aa32d3c547fe60f0
+              requests:
+                cpu: "200m"
+              limits:
+                cpu: "300m"
+          
+          hpa:
+            minReplicas: 1
+            maxReplicas: 3
+            metrics:
+              cpu:
+                averageUtilization: 50
+        
+        client:
+          ingress:
+            host: todo-list-testing.niyov.com
+          
+          deployment:
+            clientContainer:
+              image: harbor.niyov.com/applications/todo-list-client-testing:2cc58b88c014dce7d5afa480aa32d3c547fe60f0
+              requests:
+                cpu: "100m"
+              limits:
+                cpu: "150m"
+
+          hpa:
+            minReplicas: 1
+            maxReplicas: 3
+            metrics:
+              cpu:
+                averageUtilization: 50
+
+        db:
+          deployment:
+            volumes:
+              pv:
+                name: todo-list-db-pv-testing
+                hostPath: /nfs/volumes/todo-list-mongo-db-testing
+              pvc:
+                name: todo-list-db-pvc-testing
+  sources: []
+  project: todo-list
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
