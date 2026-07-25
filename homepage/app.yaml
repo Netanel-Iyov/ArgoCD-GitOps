@@ -1,0 +1,81 @@
+project: default
+source:
+  repoURL: https://jameswynn.github.io/helm-charts
+  targetRevision: 2.0.1
+  helm:
+    releaseName: homepage
+    values: >
+      # Enable RBAC so Homepage can auto-discover your cluster services via
+      annotations
+
+      enableRbac: true
+
+
+      # Expose your dashboard
+
+      service:
+        main:
+          ports:
+            http:
+              port: 3000
+
+      # Configure Ingress for your local homelab domain
+
+      ingress:
+        main:
+          enabled: true
+          hosts:
+            - host: homepage.niyov.com
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: niyov-wildcard-tls
+              hosts:
+                - homepage.niyov.com
+      # Define your standard Homepage configuration maps inline
+
+      config:
+        settings:
+          title: Homelab Dashboard
+          theme: dark
+          layout:
+            Infrastructure:
+              style: grid
+              columns: 5
+        
+        bookmarks:
+          - Developer:
+            - Github:
+              - icon: github
+                href: https://github.com/Netanel-Iyov
+                description: My Personal Github Account
+
+        services:
+          - Infrastructure:
+              - Argo CD:
+                  icon: https://argo-cd.readthedocs.io/en/stable/assets/logo.png
+                  href: https://argocd.niyov.com
+                  description: GitOps Controller
+              - Harbor:
+                  icon: harbor
+                  href: https://harbor.niyov.com
+                  description: Container Registry
+              - Jenkins:
+                  icon: jenkins
+                  href: https://jenkins.niyov.com
+                  description: CI/CD Server
+              - Proxmox:
+                  icon: proxmox
+                  href: http://192.168.0.201:8006
+                  description: Proxmox Hypervisor (Locally Exposed Only)
+  chart: homepage
+destination:
+  server: https://kubernetes.default.svc
+  namespace: homepage
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
