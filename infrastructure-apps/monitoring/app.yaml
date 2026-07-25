@@ -42,6 +42,29 @@ spec:
                     requests:
                       storage: 50Gi
 
+        prometheusOperator:
+          enabled: true
+          createCustomResource: true
+          admissionWebhooks:
+            enabled: true
+
+            annotations:
+              argocd.argoproj.io/hook: PreSync
+              argocd.argoproj.io/hook-delete-policy: HookFailed
+
+            patch:
+              annotations:
+                argocd.argoproj.io/hook: PreSync
+                argocd.argoproj.io/hook-delete-policy: HookFailed
+
+            mutatingWebhookConfiguration:
+              annotations:
+                argocd.argoproj.io/hook: PreSync
+
+            validatingWebhookConfiguration:
+              annotations:
+                argocd.argoproj.io/hook: PreSync
+
         alertmanager:
           enabled: true
 
