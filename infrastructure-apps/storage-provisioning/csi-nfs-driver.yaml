@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         controller:
-          replicas: 2
+          replicas: 1
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
