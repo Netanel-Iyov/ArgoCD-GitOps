@@ -80,8 +80,8 @@ spec:
                     description: Metrics Dashboards
                 - Prometheus:
                     icon: prometheus
-                    href: https://prometheus.niyov.com
-                    description: Metrics & Monitoring
+                    href: http://192.168.0.221:30000
+                    description: Metrics & Monitoring (Locally Exposed Only)
                 - Proxmox:
                     icon: proxmox
                     href: http://192.168.0.201:8006

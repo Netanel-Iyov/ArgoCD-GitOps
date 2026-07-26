@@ -25,17 +25,13 @@ spec:
           #     static_configs:
           #       - targets:
           #         - jenkins.niyov.com
-          ingress:
-            enabled: true
-            ingressClassName: nginx
-            annotations:
-              nginx.ingress.kubernetes.io/ssl-redirect: "true"
-            hosts:
-              - prometheus.niyov.com
-            tls:
-              - secretName: niyov-wildcard-tls
-                hosts:
-                  - prometheus.niyov.com
+          # NodePort service on the local network only. Reachable at any
+          # cluster node's IP on this fixed port - not exposed via ingress,
+          # so it's only accessible from devices on the home LAN, not the
+          # internet.
+          service:
+            type: NodePort
+            nodePort: 30000
 
         alertmanager:
           persistence:
