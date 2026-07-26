@@ -29,16 +29,26 @@ spec:
                 url: http://prometheus-server.prometheus.svc.cluster.local
                 isDefault: true
 
-        # Sidecar watches ConfigMaps labeled grafana_dashboard and loads them
-        # automatically. Required for the gnetId-based imports below.
-        sidecar:
-          dashboards:
-            enabled: true
-            label: grafana_dashboard
-            labelValue: "1"
+        # Tells Grafana where to find provisioned dashboard JSON files on disk.
+        # Required for the gnetId-based imports below - without this, the
+        # downloaded JSON sits on disk but Grafana never loads it.
+        dashboardProviders:
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+              - name: 'default'
+                orgId: 1
+                folder: ''
+                type: file
+                disableDeletion: false
+                editable: true
+                options:
+                  path: /var/lib/grafana/dashboards/default
 
-        # Dashboards imported directly from grafana.com by ID (downloaded as
-        # JSON at deploy time and provisioned automatically via the sidecar).
+        # Dashboards imported directly from grafana.com by ID. The chart's
+        # download-dashboards init container fetches the JSON at pod startup
+        # and writes it into /var/lib/grafana/dashboards/default, where the
+        # provider above picks it up.
         dashboards:
           default:
             node-exporter-full:
