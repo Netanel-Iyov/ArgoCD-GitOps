@@ -55,13 +55,33 @@ spec:
               gnetId: 1860
               revision: 45
               datasource: Prometheus
-            kubernetes-cluster-monitoring:
-              gnetId: 14205
+            # kubernetes-cluster-monitoring:
+            #   gnetId: 14205
+            #   revision: 1
+            #   datasource: Prometheus
+            # kubernetes-namespaces-monitoring:
+            #   gnetId: 15758
+            #   revision: 46
+            #   datasource: Prometheus
+            k8s-compute-resources-cluster:
+              gnetId: 12114
               revision: 1
               datasource: Prometheus
-            kubernetes-namespaces-monitoring:
-              gnetId: 15758
-              revision: 46
+            k8s-compute-resources-namespace-pods:
+              gnetId: 12117
+              revision: 1
+              datasource: Prometheus
+            k8s-compute-resources-node-pods:
+              gnetId: 12119
+              revision: 1
+              datasource: Prometheus
+            k8s-compute-resources-workload:
+              gnetId: 12121
+              revision: 1
+              datasource: Prometheus
+            k8s-compute-resources-pod:
+              gnetId: 14438
+              revision: 1
               datasource: Prometheus
 
         ingress:
