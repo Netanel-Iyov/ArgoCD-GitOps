@@ -55,6 +55,10 @@ spec:
               gnetId: 1860
               revision: 45
               datasource: Prometheus
+            kubernetes-global-monitoring:
+              gnetId: 15757
+              revision: 43
+              datasource: Prometheus
             kubernetes-namespaces-monitoring:
               gnetId: 15758
               revision: 46
