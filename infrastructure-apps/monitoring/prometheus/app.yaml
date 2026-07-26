@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus
+    targetRevision: '29.19.0'
+    helm:
+      releaseName: prometheus
+      values: |
+        server:
+          persistentVolume:
+            enabled: true
+            storageClass: nfs-csi-default-storageclass
+            size: 20Gi
+          # extraScrapeConfigs: |
+          #   - job_name: jenkins
+          #     metrics_path: /prometheus/
+          #     static_configs:
+          #       - targets:
+          #         - jenkins.niyov.com
+
+        alertmanager:
+          persistence:
+            enabled: true
+            storageClass: nfs-csi-default-storageclass
+            size: 2Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prometheus
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
