@@ -56,8 +56,8 @@ spec:
               revision: 45
               datasource: Prometheus
             kubernetes-cluster-monitoring:
-              gnetId: 315
-              revision: 3
+              gnetId: 18330
+              revision: 1
               datasource: Prometheus
 
         ingress:
