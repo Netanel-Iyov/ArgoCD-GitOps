@@ -29,6 +29,27 @@ spec:
                 url: http://prometheus-server.prometheus.svc.cluster.local
                 isDefault: true
 
+        # Sidecar watches ConfigMaps labeled grafana_dashboard and loads them
+        # automatically. Required for the gnetId-based imports below.
+        sidecar:
+          dashboards:
+            enabled: true
+            label: grafana_dashboard
+            labelValue: "1"
+
+        # Dashboards imported directly from grafana.com by ID (downloaded as
+        # JSON at deploy time and provisioned automatically via the sidecar).
+        dashboards:
+          default:
+            node-exporter-full:
+              gnetId: 1860
+              revision: 45
+              datasource: Prometheus
+            kubernetes-cluster-monitoring:
+              gnetId: 315
+              revision: 3
+              datasource: Prometheus
+
         ingress:
           enabled: true
           ingressClassName: nginx
