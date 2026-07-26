@@ -25,6 +25,17 @@ spec:
           #     static_configs:
           #       - targets:
           #         - jenkins.niyov.com
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+            hosts:
+              - prometheus.niyov.com
+            tls:
+              - secretName: niyov-wildcard-tls
+                hosts:
+                  - prometheus.niyov.com
 
         alertmanager:
           persistence:

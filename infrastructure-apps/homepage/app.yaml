@@ -74,6 +74,14 @@ spec:
                     icon: jenkins
                     href: https://jenkins.niyov.com
                     description: CI/CD Server
+                - Grafana:
+                    icon: grafana
+                    href: https://grafana.niyov.com
+                    description: Metrics Dashboards
+                - Prometheus:
+                    icon: prometheus
+                    href: https://prometheus.niyov.com
+                    description: Metrics & Monitoring
                 - Proxmox:
                     icon: proxmox
                     href: http://192.168.0.201:8006
