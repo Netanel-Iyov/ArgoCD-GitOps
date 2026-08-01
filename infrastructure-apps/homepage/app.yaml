@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://jameswynn.github.io/helm-charts
-    targetRevision: 2.0.1
+    targetRevision: 2.1.0
     chart: homepage
     helm:
       releaseName: homepage
@@ -19,6 +19,15 @@ spec:
 
         enableRbac: true
 
+
+        # Required as of Homepage v1.0+: without this, requests to any host
+        # other than localhost/127.0.0.1 (e.g. our ingress hostname) are
+        # rejected by the app's built-in host validation.
+        # ref: https://gethomepage.dev/installation/#homepage_allowed_hosts
+
+        env:
+          - name: HOMEPAGE_ALLOWED_HOSTS
+            value: homepage.niyov.com
 
         # Expose your dashboard
 
