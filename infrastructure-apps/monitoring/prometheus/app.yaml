@@ -38,6 +38,16 @@ spec:
             enabled: true
             storageClass: nfs-csi-default-storageclass
             size: 2Gi
+          # NodePort on the home LAN only, mirrors alertmanager's default port (9093).
+          service:
+            type: NodePort
+            nodePort: 30093
+
+        prometheus-pushgateway:
+          # NodePort on the home LAN only, mirrors pushgateway's default port (9091).
+          service:
+            type: NodePort
+            nodePort: 30091
   destination:
     server: https://kubernetes.default.svc
     namespace: prometheus
