@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Netanel-Iyov/winning-horse-app.git
-    targetRevision: main
+    targetRevision: f7a3e9fe60ecb5fec91445ae51b72991a3c57925
     path: deploy/helm/winning-horse
     helm:
       values: |
