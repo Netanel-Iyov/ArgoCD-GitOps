@@ -15,11 +15,11 @@ spec:
           namespace: winning-horse-staging
         api:
           image:
-            tag: 1.0.0
+            tag: 1.0.1
           corsOrigins: https://winning-horse-staging.niyov.com
         frontend:
           image:
-            tag: 1.0.0
+            tag: 1.0.1
         ingress:
           frontendHost: winning-horse-staging.niyov.com
           apiHost: api-winning-horse-staging.niyov.com
