@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: winning-horse-production
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Netanel-Iyov/winning-horse-app.git
+    targetRevision: v1.0.0
+    path: deploy/helm/winning-horse
+    helm:
+      values: |
+        global:
+          namespace: winning-horse-production
+        api:
+          image:
+            tag: v1.0.0
+          corsOrigins: https://winning-horse.niyov.com
+        frontend:
+          image:
+            tag: v1.0.0
+        ingress:
+          frontendHost: winning-horse.niyov.com
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: winning-horse-production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
