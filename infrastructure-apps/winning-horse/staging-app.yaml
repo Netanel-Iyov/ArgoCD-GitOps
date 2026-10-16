@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Netanel-Iyov/winning-horse-app.git
-    targetRevision: a34e671f5e31ab8e555304e16b6eeef11ee05f0b
+    targetRevision: 75eb78cd1c86210d6188c0116c98ad5c50227934
     path: deploy/helm/winning-horse
     helm:
       values: |
@@ -15,11 +15,11 @@ spec:
           namespace: winning-horse-staging
         api:
           image:
-            tag: a34e671f5e31ab8e555304e16b6eeef11ee05f0b
+            tag: 75eb78cd1c86210d6188c0116c98ad5c50227934
           corsOrigins: https://winning-horse-staging.niyov.com
         frontend:
           image:
-            tag: a34e671f5e31ab8e555304e16b6eeef11ee05f0b
+            tag: 75eb78cd1c86210d6188c0116c98ad5c50227934
         ingress:
           frontendHost: winning-horse-staging.niyov.com
           apiHost: api-winning-horse-staging.niyov.com
